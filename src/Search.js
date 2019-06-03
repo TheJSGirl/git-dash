@@ -27,8 +27,6 @@ class SearchProfile extends Component {
     async onSearch() {
         const {data} = await axios(`https://api.github.com/users/${this.state.username}`);
         this.setState({username: data.login, name:data.name, isClicked:true })
-        console.log(data)
-
     }
     render() {
         const {isClicked} = this.state;
@@ -45,7 +43,7 @@ class SearchProfile extends Component {
                 name='username'
                 onChange={this.handleOnchange}
                 />
-               {isClicked && (<GithubInfo username={this.state.username} />)}
+               {isClicked && (<GithubInfo username={this.state.username} name={this.state.name} />)}
             </div>
         );
     }

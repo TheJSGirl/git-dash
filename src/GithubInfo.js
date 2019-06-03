@@ -7,14 +7,16 @@ class GithubInfo extends Component {
         super(props)
     }
 
-     componentDidMount(){
+     componentWillReceiveProps(){
         const {data:repos} =  axios(`https://api.github.com/users/${this.props.username}repos`);
-        console.log("---------", repos);
         }
 
         render() {
             return(
-                <div>Github Info</div>
+                <div>
+                    <h1>Github Information of {this.props.name}</h1>
+                    
+                </div>
             )
         }
 
