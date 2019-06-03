@@ -1,0 +1,21 @@
+.GitInfo{
+    display: flex;
+    flex-basis:auto;
+   
+
+}
+.header{
+
+    margin-top: 2rem;
+    margin-left: 15rem;
+
+}
+.Repo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 2rem;
+    margin-top: 3rem;
+    justify-items: center;
+
+}

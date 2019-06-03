@@ -1,0 +1,11 @@
+.Github {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+/* .Github-child{
+    display: flex;
+    flex-direction: column;
+
+} */

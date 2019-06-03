@@ -3,7 +3,7 @@ import { Input } from 'antd';
 import 'antd/dist/antd.css';
 import './Search.css';
 import axios from 'axios';
-import GithubInfo from './GithubInfo';
+import GithubInfo from './GitInfo';
 const Search = Input.Search;
 
 class SearchProfile extends Component {
