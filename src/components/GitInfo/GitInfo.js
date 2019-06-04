@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './GitInfo.css';
 import Github from '../Github/Github';
+import {config} from '../../config';
+
 
 class GithubInfo extends Component {
 
@@ -13,7 +15,7 @@ class GithubInfo extends Component {
     }
 
     async componentWillReceiveProps(){
-        const {data} = await axios(`https://api.github.com/users/${this.props.username}/repos`)
+        const {data} = await axios(`https://api.github.com/users/${this.props.username}/repos?access_token=${config.token}`)
             this.setState({repos:data})
 
         }

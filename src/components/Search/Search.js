@@ -4,6 +4,8 @@ import 'antd/dist/antd.css';
 import './Search.css';
 import axios from 'axios';
 import GithubInfo from '../GitInfo/GitInfo';
+import {config} from '../../config';
+
 const Search = Input.Search;
 
 class SearchProfile extends Component {
@@ -25,7 +27,7 @@ class SearchProfile extends Component {
 
     }
     async onSearch() {
-        const {data} = await axios(`https://api.github.com/users/${this.state.username}`);
+        const {data} = await axios(`https://api.github.com/users/${this.state.username}?access_token=${config.token}`);
         this.setState({username: data.login, name: data.name, isClicked:true })
     }
     render() {
@@ -37,7 +39,7 @@ class SearchProfile extends Component {
                 enterButton="Search"
                 size="large"
                 style={{ width: 400}}
-                onClick={this.onSearch}
+                onSearch={this.onSearch}
                 className="Search-inbox"
                 value={this.state.username}
                 name='username'
