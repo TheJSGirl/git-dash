@@ -4,11 +4,11 @@ import './Github.css'
 
 class Github extends Component {
     render() {
-        const {cloneUrl, username, fullName, forksCount, language, pushAt, appUrl} = this.props;
+        const {username, fullName, forksCount, language, pushAt, appUrl} = this.props.repoData;
         return(
             <div className="Github">
                 <div style={{ background: '#ECECEC', padding: '30px' }}>
-                <Card title={username} bordered={false} style={{ width: 300 }}>
+                <Card title={username} bordered={false} style={{ width: 400 }}>
                     <p>Project Name:{fullName}</p>
                     <p>Forks Count: {forksCount}</p>
                     <p>Language: {language}</p>

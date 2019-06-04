@@ -20,16 +20,18 @@ class GithubInfo extends Component {
     }
 
         render() {
-            const repos = this.state.repos.map(repo => (
-            <Github  
-                cloneUrl ={repo.clone_url}
-                fullName = {repo.full_name}
-                forksCount = {repo.forks_count}
-                language = {repo.language}
-                pushedAt = {repo.pushed_at}
-                appUrl = {repo.svn_url}
-                username = {this.props.name}
-            />));
+            const repos = this.state.repos.map(repo => {
+                const repoData = {
+                    cloneUrl: repo.clone_url,
+                    fullName: repo.full_name,
+                    forksCount: repo.forks_count,
+                    language: repo.language,
+                    pushedAt: repo.pushed_at,
+                    appUrl: repo.svn_url,
+                    username: this.props.name
+                }
+            return <Github repoData={repoData}/>
+        });
 
             return(
                 <div className="Github">
