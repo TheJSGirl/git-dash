@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import './GitInfo.css';
-import Github from './Github';
+import Github from '../Github/Github';
 
 class GithubInfo extends Component {
 

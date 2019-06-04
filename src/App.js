@@ -1,14 +1,9 @@
 import React from 'react';
-import Search from './Search';
+import Search from './components/Search/Search';
 
 function App() {
   return (
-    <Search
-    placeholder="input search text"
-    enterButton="Search"
-    size="large"
-    onSearch={value => console.log(value)}
-  />
+    <Search />
   );
 }
 
