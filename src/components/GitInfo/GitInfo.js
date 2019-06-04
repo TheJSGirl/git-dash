@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import './GitInfo.css';
 import Github from '../Github/Github';
-import {config} from '../../config';
+import {getAllRepos} from '../../service';
 
 
 class GithubInfo extends Component {
@@ -14,11 +13,11 @@ class GithubInfo extends Component {
         }
     }
 
-    async componentWillReceiveProps(){
-        const {data} = await axios(`https://api.github.com/users/${this.props.username}/repos?access_token=${config.token}`)
+    componentDidMount(){
+        getAllRepos(this.props.username).then(({data}) => {
             this.setState({repos:data})
-
-        }
+        });
+    }
 
         render() {
             const repos = this.state.repos.map(repo => (

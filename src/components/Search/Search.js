@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import { Input } from 'antd';
 import 'antd/dist/antd.css';
 import './Search.css';
-import axios from 'axios';
 import GithubInfo from '../GitInfo/GitInfo';
-import {config} from '../../config';
+import {getUserDetail} from '../../service';
+
 
 const Search = Input.Search;
 
@@ -26,12 +26,13 @@ class SearchProfile extends Component {
         this.setState({[event.target.name]: event.target.value});
 
     }
-    async onSearch() {
-        const {data} = await axios(`https://api.github.com/users/${this.state.username}?access_token=${config.token}`);
-        this.setState({username: data.login, name: data.name, isClicked:true })
+    onSearch() {
+        const {username} = this.state;
+        getUserDetail(username).then(({data}) => {
+            this.setState({username: data.login, name: data.name})
+        })
     }
     render() {
-        const {isClicked} = this.state;
         return(
             <div className="Search">
                 <Search
