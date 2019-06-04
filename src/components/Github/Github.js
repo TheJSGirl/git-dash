@@ -12,7 +12,7 @@ class Github extends Component {
                     <p>Project Name:{fullName}</p>
                     <p>Forks Count: {forksCount}</p>
                     <p>Language: {language}</p>
-                    <p>App Url: {appUrl}</p>
+                    <a href= {appUrl}>App Url</a>
                     <p>Pushed At: {pushAt}</p>
                 </Card>
             </div>
