@@ -33,7 +33,7 @@ class GithubInfo extends Component {
     }
 
     /**
-     * This component life cycle use to update the component 
+     * This component life cycle use to update the
      */
     componentDidUpdate() {
         getAllRepos(this.props.username).then(({data}) => {
@@ -42,7 +42,7 @@ class GithubInfo extends Component {
     }
 
         render() {
-            const repos = this.state.repos.map(repo => {
+            const repos = this.state.repos.map((repo, i) => {
                 const repoData = {
                     cloneUrl: repo.clone_url,
                     fullName: repo.full_name,
@@ -52,7 +52,7 @@ class GithubInfo extends Component {
                     appUrl: repo.svn_url,
                     username: this.props.name
                 }
-            return <Github repoData={repoData}/>
+            return <Github repoData={repoData} key={i}/>
         });
 
             return(
