@@ -13,7 +13,29 @@ class GithubInfo extends Component {
         }
     }
 
+    /**
+     * This component life cycle use to prevent re-rendering
+     * @param {object} nextProps 
+     * @param {object} nextState 
+     */
+    shouldComponentUpdate(nextProps, nextState) {
+        return this.props.username !== nextProps.username;
+    }
+
+    
+    /**
+     * This component life cycle use to call the api 
+     */
     componentDidMount(){
+        getAllRepos(this.props.username).then(({data}) => {
+            this.setState({repos:data})
+        });
+    }
+
+    /**
+     * This component life cycle use to update the component 
+     */
+    componentDidUpdate() {
         getAllRepos(this.props.username).then(({data}) => {
             this.setState({repos:data})
         });
