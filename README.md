@@ -4,7 +4,7 @@
 - Displaying all repositories of the user
 - Displaying user information
 - Used axios for api calls
-- Followed all component life cycle to render the components
+- Followed component life cycle to render the components
 
 ### Tech Used:
 - ReactJs
