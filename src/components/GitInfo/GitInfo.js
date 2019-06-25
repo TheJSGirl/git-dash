@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './GitInfo.css';
+import {connect} from 'react-redux';
 import Github from '../Github/Github';
 import {getAllRepos} from '../../service';
 
@@ -69,4 +70,9 @@ class GithubInfo extends Component {
 
 }
 
-export default GithubInfo;
+function mapStateToProps(state) {
+    return state;
+  }
+
+
+export default connect(null)(GithubInfo);

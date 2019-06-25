@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
 import { Input } from 'antd';
+import {connect} from 'react-redux';
 import 'antd/dist/antd.css';
 import './Search.css';
 import GithubInfo from '../GitInfo/GitInfo';
-import {getUserDetail} from '../../service';
+import { getUserDetail } from '../../actions';
 
 
 const Search = Input.Search;
@@ -28,11 +29,10 @@ class SearchProfile extends Component {
     }
     onSearch() {
         const {username} = this.state;
-        getUserDetail(username).then(({data}) => {
-            this.setState({username: data.login, name: data.name})
-        })
+        this.props.getUserDetail(username);
     }
     render() {
+        const {name, username} = this.props.data.userData;
         return(
             <div className="Search">
                 <Search
@@ -46,10 +46,16 @@ class SearchProfile extends Component {
                 name='username'
                 onChange={this.handleOnchange}
                 />
-               {this.state.name && (<GithubInfo username={this.state.username} name={this.state.name} />)}
+               { name && (<GithubInfo />)}
             </div>
         );
     }
 }
 
-export default SearchProfile;
+function mapStateToProps({data}){
+    return {
+        data
+    };
+  }
+
+ export default connect(mapStateToProps, {getUserDetail})(SearchProfile)
