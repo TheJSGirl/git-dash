@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './GitInfo.css';
 import {connect} from 'react-redux';
 import Github from '../Github/Github';
-import {getAllRepos} from '../../service';
+import {getAllRepos} from '../../actions';
 
 
 class GithubInfo extends Component {
@@ -28,22 +28,22 @@ class GithubInfo extends Component {
      * This component life cycle use to call the api 
      */
     componentDidMount(){
-        getAllRepos(this.props.username).then(({data}) => {
-            this.setState({repos:data})
-        });
+        const {username} = this.props.data.userData;
+        this.props.getAllRepos(username);
     }
 
     /**
      * This component life cycle use to update the
      */
     componentDidUpdate() {
-        getAllRepos(this.props.username).then(({data}) => {
-            this.setState({repos:data})
-        });
+        const {username} = this.props.data.userData;
+        this.props.getAllRepos(username);
+
     }
 
         render() {
-            const repos = this.state.repos.map((repo, i) => {
+            const repos = this.props.data.userRepos.map((repo, i) => {
+                console.log("repos---", repo)
                 const repoData = {
                     cloneUrl: repo.clone_url,
                     fullName: repo.full_name,
@@ -59,10 +59,10 @@ class GithubInfo extends Component {
             return(
                 <div className="Github">
                     <div className="header">
-                        <h1>Github Information of {this.props.name}</h1>
+                        <h1>Github Information of {this.props.data.userData.name}</h1>
                     </div>
                     <div className="Repo">
-                        {repos}
+                        <Github />
                     </div>
                 </div>
             )
@@ -70,9 +70,9 @@ class GithubInfo extends Component {
 
 }
 
-function mapStateToProps(state) {
-    return state;
+function mapStateToProps(data) {
+    return data;
   }
 
 
-export default connect(null)(GithubInfo);
+export default connect(mapStateToProps, {getAllRepos})(GithubInfo);
