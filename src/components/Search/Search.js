@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import './Search.css';
 import GithubInfo from '../GitInfo/GitInfo';
 import { getUserDetail } from '../../actions';
+import { relative } from 'path';
 
 const Search = Input.Search;
 
@@ -33,26 +34,34 @@ class SearchProfile extends Component {
     render() {
         const {name, username} = this.props.data.userData;
         return(
-            <div style={ {margin: "3%",
-                "margin-left": "20%",
-                'position': "absolute"}}>
+            <div style={{'position': 'relative'}}>
                 <Row type="flex" justify="center" align="middle" >
                     <Col>
-                    <Search
-                        placeholder="input search text"
-                        enterButton="Search"
-                        size="large"
-                        style={{ width: 400}}
-                        onSearch={this.onSearch}
-                        className="Search-inbox"
-                        value={this.state.username}
-                        name='username'
-                        onChange={this.handleOnchange}
-                        />
+                        <div style={ {'margin-top': "8%"}}>
+                        <Search
+                            placeholder="input search text"
+                            enterButton="Search"
+                            size="large"
+                            style={{ width: 400}}
+                            onSearch={this.onSearch}
+                            className="Search-inbox"
+                            value={this.state.username}
+                            name='username'
+                            onChange={this.handleOnchange}
+                            />
+                        </div>
                     </Col>
-                    { name && (<GithubInfo />)}
                 </Row>
-            </div>
+                <Row type="flex" justify="center" align="middle" >
+                    <Col>
+                       <div style={ {'margin-left': "25%", 'marginTop':"2%"}}>
+                        { name && (<GithubInfo />)}
+                       </div>
+
+                    </Col>
+
+                </Row>
+        </div>
             
         );
     }
