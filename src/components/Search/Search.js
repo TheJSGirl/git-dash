@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-import { Input } from 'antd';
+import { Input, Row, Col } from 'antd';
 import {connect} from 'react-redux';
 import 'antd/dist/antd.css';
 import './Search.css';
 import GithubInfo from '../GitInfo/GitInfo';
 import { getUserDetail } from '../../actions';
-
 
 const Search = Input.Search;
 
@@ -34,20 +33,27 @@ class SearchProfile extends Component {
     render() {
         const {name, username} = this.props.data.userData;
         return(
-            <div className="Search">
-                <Search
-                placeholder="input search text"
-                enterButton="Search"
-                size="large"
-                style={{ width: 400}}
-                onSearch={this.onSearch}
-                className="Search-inbox"
-                value={this.state.username}
-                name='username'
-                onChange={this.handleOnchange}
-                />
-               { name && (<GithubInfo />)}
+            <div style={ {margin: "3%",
+                "margin-left": "20%",
+                'position': "absolute"}}>
+                <Row type="flex" justify="center" align="middle" >
+                    <Col>
+                    <Search
+                        placeholder="input search text"
+                        enterButton="Search"
+                        size="large"
+                        style={{ width: 400}}
+                        onSearch={this.onSearch}
+                        className="Search-inbox"
+                        value={this.state.username}
+                        name='username'
+                        onChange={this.handleOnchange}
+                        />
+                    </Col>
+                    { name && (<GithubInfo />)}
+                </Row>
             </div>
+            
         );
     }
 }

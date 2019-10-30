@@ -43,7 +43,6 @@ class GithubInfo extends Component {
 
         render() {
             const repos = this.props.data.userRepos.map((repo, i) => {
-                console.log("repos---", repo)
                 const repoData = {
                     cloneUrl: repo.clone_url,
                     fullName: repo.full_name,
