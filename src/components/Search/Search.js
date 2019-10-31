@@ -1,76 +1,60 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import { Input, Row, Col } from 'antd';
-import {connect} from 'react-redux';
 import 'antd/dist/antd.css';
 import './Search.css';
 import GithubInfo from '../GitInfo/GitInfo';
-import { getUserDetail } from '../../actions';
-import { relative } from 'path';
+import {config} from '../../config';
+
+import axios from 'axios';
 
 const Search = Input.Search;
 
-class SearchProfile extends Component {
+ const getUserDetail = async (username) => {
+    const res =  await axios(`https://api.github.com/users/${username}?access_token=${config.token}`);
+    return res;
+}
+const SearchProfile = () => {
+    const [username, setUsername] = useState("");
+    const [name, setName] = useState("");
 
-    constructor(props){
-        super(props)
-        this.state = {
-            username:'',
-            name:'',
-            isClicked: false
-        }
-        this.handleOnchange = this.handleOnchange.bind(this);
-        this.onSearch = this.onSearch.bind(this);
+    const handleOnchange = (event) => {
+        setUsername(event.target.value);
     }
 
-    handleOnchange(event) {
-        event.preventDefault();
-        this.setState({[event.target.name]: event.target.value});
+    const onSearch = async(event) => {
+        const {data} = await getUserDetail(username); 
+        setName(data.name);
+    }
 
-    }
-    onSearch() {
-        const {username} = this.state;
-        this.props.getUserDetail(username);
-    }
-    render() {
-        const {name, username} = this.props.data.userData;
-        return(
-            <div style={{'position': 'relative'}}>
-                <Row type="flex" justify="center" align="middle" >
-                    <Col>
-                        <div style={ {'margin-top': "8%"}}>
+    return(
+        <div style={{'position': 'relative'}}>
+            <Row type="flex" justify="center" align="middle" >
+                <Col>
+                    <div style={ {'margin-top': "8%"}}>
                         <Search
                             placeholder="input search text"
                             enterButton="Search"
                             size="large"
                             style={{ width: 400}}
-                            onSearch={this.onSearch}
+                            // onClick={() => this.handleOnclick()}
+                            onSearch={(e) => onSearch(e)}
                             className="Search-inbox"
-                            value={this.state.username}
+                            value={username}
                             name='username'
-                            onChange={this.handleOnchange}
+                            onChange={(e) => handleOnchange(e)}
                             />
-                        </div>
-                    </Col>
-                </Row>
-                <Row type="flex" justify="center" align="middle" >
-                    <Col>
-                       <div style={ {'margin-left': "25%", 'marginTop':"2%"}}>
+                    </div>
+                </Col>
+            </Row>
+            <Row type="flex" justify="center" align="middle" >
+                 <Col>
+                    <div style={ {'margin-left': "25%", 'marginTop':"2%"}}>
                         { name && (<GithubInfo />)}
-                       </div>
-
-                    </Col>
-
-                </Row>
-        </div>
-            
-        );
-    }
+                    </div>
+                </Col>
+            </Row>
+            </div>
+    );
 }
 
-function mapStateToProps({data}){
-    return {
-        data
-    };
-  }
-
- export default connect(mapStateToProps, {getUserDetail})(SearchProfile)
+export default SearchProfile;
